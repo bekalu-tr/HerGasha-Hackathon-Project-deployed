@@ -1,0 +1,165 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==============================
+   GLOBAL RESET AND BASE STYLES
+================================= */
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply m-0 bg-pinkBg font-sans text-bodyText antialiased;
+    min-width: 320px;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+
+  img {
+    @apply max-w-full;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold text-plum;
+  }
+
+  ::selection {
+    @apply bg-magenta text-white;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-magenta ring-offset-2;
+  }
+}
+
+/* ==============================
+   REUSABLE COMPONENT STYLES
+================================= */
+
+@layer components {
+  .page-container {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+
+  .section-heading {
+    @apply text-2xl font-bold text-plum sm:text-3xl lg:text-4xl;
+  }
+
+  .section-description {
+    @apply mt-3 max-w-2xl text-sm leading-7 text-gray-600 sm:text-base;
+  }
+
+  .card {
+    @apply rounded-2xl border border-pink-100 bg-white p-5 shadow-soft transition duration-300;
+  }
+
+  .card-hover {
+    @apply hover:-translate-y-1 hover:shadow-card;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-plum px-6 py-3 font-semibold text-white transition duration-200 hover:bg-purple focus-visible:ring-magenta disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-magenta px-6 py-3 font-semibold text-white transition duration-200 hover:bg-pink-700 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-plum px-6 py-3 font-semibold text-plum transition duration-200 hover:bg-primary-light;
+  }
+
+  .form-label {
+    @apply mb-2 block text-sm font-semibold text-gray-700;
+  }
+
+  .form-input {
+    @apply w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-bodyText outline-none transition placeholder:text-gray-400 focus:border-magenta focus:ring-2 focus:ring-magenta/20;
+  }
+
+  .form-error {
+    @apply mt-1 text-xs font-medium text-red-600;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold;
+  }
+
+  .badge-success {
+    @apply bg-green-100 text-green-700;
+  }
+
+  .badge-warning {
+    @apply bg-amber-100 text-amber-700;
+  }
+
+  .badge-danger {
+    @apply bg-red-100 text-red-700;
+  }
+
+  .badge-primary {
+    @apply bg-primary-light text-plum;
+  }
+}
+
+/* ==============================
+   SCROLLBAR
+================================= */
+
+@layer utilities {
+  .scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ==============================
+   ACCESSIBILITY
+================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
