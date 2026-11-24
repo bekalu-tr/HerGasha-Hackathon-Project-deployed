@@ -16,13 +16,29 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 const app = express();
 
+// Trust Render's reverse proxy so X-Forwarded-For and express-rate-limit work properly
+app.set("trust proxy", 1);
+
+const allowedOrigins = [
+  "https://her-gasha-client.onrender.com",
+  "http://localhost:5173",
+  "http://localhost:3000",
+  process.env.CLIENT_URL,
+].filter(Boolean);
+
 // 1. Security middleware
 app.use(helmet());
 
 // 2. CORS configuration
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin(origin, callback) {
+      // Allow non-browser/same-origin requests with no Origin header
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error(`Not allowed by CORS: ${origin}`));
+    },
     credentials: true,
   }),
 );
